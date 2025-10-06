@@ -1,0 +1,10 @@
+name: Microarray_plotter
+title: Microarray_plotter
+username: ewvdrp-marcus-ziemann
+account: ewvdrp-marcus-ziemann
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12064684
+bundleId:
+url: https://ewvdrp-marcus-ziemann.shinyapps.io/Microarray_plotter/
+version: 1
