@@ -1,6 +1,6 @@
 library(limma)
 library(scales)
-library(DataCombine)
+#library(DataCombine)
 library(colourpicker)
 library(gridExtra)
 library(gridGraphics)
@@ -46,7 +46,7 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
   if(is.null(max_micro)) max_micro <- NA
   if(is.null(ntlength)) ntlength <- NA
   
-  max1 <- max(Annotation$end[which(Annotation$Replicon==replicon)], Gff$end[which(Gff$molecule=="replicon")])
+  max1 <- max(Annotation$end[which(Annotation$Replicon==replicon)], Gff$end[which(Gff$Replicon==replicon)])
   end <- min(max1+500, end)
   
   
@@ -194,7 +194,7 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
   g0 <- which(((Gff$start>=start & Gff$end<=end) |
                  (Gff$start<start & Gff$end>start) |
                  (Gff$start<end & Gff$end>end)) &
-                Gff$molecule==replicon)#get all relevant Gff-elements
+                Gff$Replicon==replicon)#get all relevant Gff-elements
   
   lb <- arrow_body_height #width of gene-arrow
   lh <-arrowhead_height
@@ -243,7 +243,7 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
     G[r1,] <-NA
     G$orientation[r1] <- c(rep(TRUE,l1),rep(FALSE,l1))
     G$lane[r1] <- rep(g,2)
-    G$molecule[r1] <- G$molecule[1]
+    G$Replicon[r1] <- G$Replicon[1]
     
   }
   
@@ -388,6 +388,7 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
   
   ap <- grid.arrange(ap_grob, plegend, ncol = 2, widths=c(1, 0.2))
   
+  
   return(ap) #return plot
   
 }
@@ -408,7 +409,7 @@ load_Gff3 <- function(input){
   G$strand <- sapply(G$strand, function(i) c(1,-1)[which(c("+","-")==i)])
   b <- which(!duplicated(G[,c(4,5,7,11)]) & !is.na(G$Gen))
   G <- G[b,c(1,11,3:5,7)]
-  colnames(G) <- c("molecule", "gene", "type", "start", "end", "orientation")
+  colnames(G) <- c("Replicon", "gene", "type", "start", "end", "orientation")
   
   h <- which(G$start>G$end)#checks values low to "start"; high to "end"
   if(length(h)>0){
@@ -419,12 +420,12 @@ load_Gff3 <- function(input){
   }
   
   G$color <- "#4682B4"
-  G$color[G$type !="gene"] <- "#D6DA18"
+  G$color[which(G$type !="gene")] <- "#D6DA18"
   G$from <- NA
   G$to <- NA
   G$subcolor <- NA
   G$label_type <- "bold"
-  G$label_type[G$type =="gene"] <- "bold.italic"
+  G$label_type[which(G$type =="gene")] <- "bold.italic"
   G$lane <- 1
   return(G)
 }
@@ -434,7 +435,7 @@ load_Gff <- function(input){
   G <- ape::read.gff(input)
   G$gene <- str_match(G$attributes,"ID=\\s*(.*?)\\s*;")[,2]
   colnames(G)[which(colnames(G)=="strand")] <- "orientation"
-  colnames(G)[which(colnames(G)=="seqid")] <- "molecule"
+  colnames(G)[which(colnames(G)=="seqid")] <- "Replicon"
   
   h <- which(G$start>G$end)
   if(length(h)>0){
@@ -445,12 +446,12 @@ load_Gff <- function(input){
   }
   
   G$color <- "#4682B4"
-  G$color[G$type !="gene"] <- "#D6DA18"
+  G$color[which(G$type !="gene")] <- "#D6DA18"
   G$from <- NA
   G$to <- NA
   G$subcolor <- NA
   G$label_type <- "bold"
-  G$label_type[G$type =="gene"] <- "bold.italic"
+  G$label_type[which(G$type =="gene")] <- "bold.italic"
   G$lane <- 1
   return(G)
 }
@@ -470,9 +471,10 @@ load_csv <- function(input){
     G$end[h] <- g2
   }
   
+  if(!any(o %in% "type")){ G$type <- "unknown" }
   if(!any(o %in% "color")){ 
     G$color <- "#4682B4"
-    G$color[G$type !="gene"] <- "#D6DA18"}
+    G$color[which(G$type !="gene")] <- "#D6DA18"}
   G$color <- str_replace_all(G$color,SPC,"")
   G$color[is.na(G$color)] <- "#D6DA18"
   

@@ -29,8 +29,14 @@ l <-list.dirs("databases", full.names = FALSE, recursive = FALSE)
 server <- function(input, output) {
   
   A <- reactive({
+    if(input$own_anno){
+      inFile <- input$file_anno$datapath
+      if (is.null(inFile)) return(NULL)
+    }else {
     lm <- list.files(str_c("databases/", input$spec), full.names = TRUE)
-    read.csv(lm[which(str_detect(lm,"Annotation"%R%DOT))], sep=";")
+    inFile <- lm[which(str_detect(lm,"Plateform.csv"))]
+    }
+    read.csv(inFile, sep=";")
     })
   
   Gff <- reactive({
@@ -189,7 +195,6 @@ server <- function(input, output) {
                                arrowhead_width = input$arrowhead_width,
                                filter_micro = input$filter_micro, 
                                order_micro = input$order_micro, 
-                               #Gfill= input$Gfill,
                                Gsize= input$Gsize,
                                msize= input$msize,
                                Mwidth = input$width,
@@ -201,7 +206,7 @@ server <- function(input, output) {
   
   
   output$map_table <- DT::renderDT({
-    mapD2 <- Gff() %>% select(molecule, gene, start, end, orientation)
+    mapD2 <- Gff() %>% select(Replicon, gene, start, end, orientation)
     DT::datatable(mapD2)#, editable = TRUE)
   })
   
@@ -230,7 +235,6 @@ server <- function(input, output) {
                           arrowhead_width = input$arrowhead_width,
                           filter_micro = input$filter_micro, 
                           order_micro = input$order_micro, 
-                          #Gfill= input$Gfill,
                           Gsize= input$Gsize,
                           msize= input$msize,
                           Mwidth = input$width,
@@ -240,16 +244,24 @@ server <- function(input, output) {
         save_plot(file, plot = data_to_save, base_width = input$width*1.25, base_height = input$height*1.25, units = "in", 
                   device = input$download_type, fix_text_size = FALSE)
       }else{
-        save_plot(file, plot = data_to_save, base_width = input$width*1.25, base_height = input$height*1.25, units = "in", 
+        save_plot(file, plot = data_to_save, bg = "white", base_width = input$width*1.25, base_height = input$height*1.25, units = "in", 
                   device = input$download_type)
       }
     })
-  output$tabgo <- downloadHandler(
+  output$tabmap <- downloadHandler(
     filename = function(){"Map.csv"}, 
     content = function(fname){
-      write.csv2(mapD(), fname)
+      write.csv2(Gff(), fname, row.names = FALSE )
     }
   )
+  
+  output$tabgo <- downloadHandler(
+    filename = function(){"MicroarrayPlatform.csv"}, 
+    content = function(fname){
+      write.csv2(A(), fname, row.names = FALSE )
+    }
+  )
+  
   
   output$Tutorial <- downloadHandler(
     filename = "MicroarrayPlotter_manual.pdf",

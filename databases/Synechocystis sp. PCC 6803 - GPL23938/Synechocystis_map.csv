@@ -1,4 +1,4 @@
-molecule;gene;type;start;end;orientation;color;lane;from;to;subcolor;label_type
+Replicon;gene;type;start;end;orientation;color;lane;from;to;subcolor;label_type
 chromosome;slr0612;gene;937;1494;1;#FFFFFF;2;NA;NA;NA;bold.italic
 chromosome;slr0613;gene;1577;2098;1;#FFFFFF;2;NA;NA;NA;bold.italic
 chromosome;sll0558;gene;2172;2873;-1;#FFFFFF;2;NA;NA;NA;bold.italic
