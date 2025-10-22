@@ -19,6 +19,8 @@ library(sortable)
 library(cowplot)
 #library(grDevices)
 library(tidyr)
+library(httpuv)
+
 
 source("Plotter.R")
 
@@ -34,7 +36,7 @@ server <- function(input, output) {
       if (is.null(inFile)) return(NULL)
     }else {
     lm <- list.files(str_c("databases/", input$spec), full.names = TRUE)
-    inFile <- lm[which(str_detect(lm,"Plateform.csv"))]
+    inFile <- lm[which(str_detect(lm,"Platform.csv"))]
     }
     read.csv(inFile, sep=";")
     })
@@ -127,11 +129,14 @@ server <- function(input, output) {
     if (is.null(N())){
       p("")
     } else{
+      Q <- N()
+      Q1 <- encodeURIComponent(Q)
+      names(Q1) <- Q
       
       tagList(
         awesomeCheckboxGroup("filter_micro",  label = "Which Microarray should be displayed?", 
-                             choices = N(),
-                             status = "danger", selected = N()))
+                             choices = Q1,
+                             status = "danger", selected = Q1))
     }
   })
   
@@ -139,9 +144,13 @@ server <- function(input, output) {
     if (is.null(N())){
       p("")
     } else{
+      Q <- N()
+      Q1 <- encodeURIComponent(Q)
+      names(Q1) <- Q
+      
       rank_list(
         text = "Choose the order of Microarrays in the plot:",
-        labels = N(),
+        labels = Q1,
         input_id = "order_micro")
     }
   })

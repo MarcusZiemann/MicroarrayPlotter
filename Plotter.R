@@ -56,8 +56,8 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
   
   
   #filter
-  q <- filter_micro
-  if(is.null(q)){q<- N}
+  if(is.null(filter_micro)){q<- N
+  }else{q <- URLdecode(filter_micro)}
   Data <- Geo[,which(N %in% q)]
   N <- N1[which(N1 %in% q)]
   rename_graphs <- rename_graphs[which(N1 %in% q)]

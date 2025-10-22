@@ -3621,8 +3621,8 @@ chromosome;asl3609;gene;4360602;4360868;-1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;alr3610;gene;4361124;4361507;1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;alr3611;gene;4361477;4361917;1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;asr3612;gene;4362509;4362694;1;#4682B4;NA;NA;NA;bold.italic;1
-chromosome;all3613;gene;4363025;4364971;-1;#4682B4;NA;NA;NA;bold.italic;1
-chromosome;alr3614;gene;4364973;4365479;1;#4682B4;NA;NA;NA;bold.italic;1
+chromosome;all3613 / cas12k;gene;4363025;4364971;-1;#4682B4;NA;NA;NA;bold.italic;1
+chromosome;alr3614 / cvkR;gene;4364973;4365479;1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;all3615;gene;4365534;4367399;-1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;all3616;gene;4367527;4367841;-1;#4682B4;NA;NA;NA;bold.italic;1
 chromosome;all3617;gene;4368001;4368318;-1;#4682B4;NA;NA;NA;bold.italic;1
@@ -6152,3 +6152,9 @@ zeta;asl9502;gene;1706;1888;-1;#4682B4;NA;NA;NA;bold.italic;1
 zeta;asr9503;gene;2359;2565;1;#4682B4;NA;NA;NA;bold.italic;1
 zeta;alr9504;gene;2957;4129;1;#4682B4;NA;NA;NA;bold.italic;1
 zeta;alr9505;gene;4130;4435;1;#4682B4;NA;NA;NA;bold.italic;1
+chromosome;tracrRNA;RNA-gene;4362780;4362990;-1;#eded47;NA;NA;NA;bold;1
+chromosome;CRISPR-array (V-K);RNA-gene;4362186;4362577;-1;#eded47;4362328;4362364;#bfbfbf;bold;1
+chromosome;CRISPR-array (V-K);RNA-gene;4362186;4362577;-1;#eded47;4362399;4362435;#bfbfbf;bold;1
+chromosome;CRISPR-array (V-K);RNA-gene;4362186;4362577;-1;#eded47;4362469;4362505;#bfbfbf;bold;1
+chromosome;CRISPR-array (V-K);RNA-gene;4362186;4362577;-1;#eded47;4362541;4362577;#bfbfbf;bold;1
+chromosome;CRISPR-array (V-K);RNA-gene;4362186;4362577;-1;#eded47;4362186;4362195;#919191;bold;1
