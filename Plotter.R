@@ -1,6 +1,4 @@
-library(limma)
 library(scales)
-#library(DataCombine)
 library(colourpicker)
 library(gridExtra)
 library(gridGraphics)
