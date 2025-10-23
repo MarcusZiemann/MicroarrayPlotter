@@ -18,8 +18,8 @@ library(svglite)
 library(sortable)
 library(cowplot)
 #library(grDevices)
-library(tidyr)
 library(httpuv)
+
 
 
 source("Plotter.R")
@@ -156,15 +156,25 @@ server <- function(input, output) {
   })
   
   
+  #output$whichcolor <- renderUI({
+   # if (is.null(N())){
+    #  p("")
+    #} else{
+    #  colo <- col1[1:length(N())]    #create colors for RNA-reads
+     # p("Choose colors:")
+    #  tagList(
+    #    lapply(1:length(N()), function(i) {
+     #     colourInput(str_c("P",i), label=N()[i], showColour = "both", value = colo[i])}))
+  #  }})
+  
   output$whichcolor <- renderUI({
     if (is.null(N())){
       p("")
     } else{
-      colo <- col1[1:length(N())]    #create colors for RNA-reads
-      
+      p("Choose colors:")
       tagList(
         lapply(1:length(N()), function(i) {
-          colourInput(str_c("P",i), label=N()[i], showColour = "both", value = colo[i])}))
+          colourInput(str_c("P",i), label=N()[i], showColour = "both", value = col1[i])}))
     }
   })
   

@@ -16,7 +16,7 @@ library(shinycssloaders)
 library(colourpicker)
 library(GEOquery)
 
-source("Plotter.R")
+#source("Plotter.R")
 
 ###shiny
 options(shiny.maxRequestSize=200*1024^2)

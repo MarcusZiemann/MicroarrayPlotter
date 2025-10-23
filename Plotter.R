@@ -96,9 +96,22 @@ Microarrayplot <- function(Geo, Annotation, Gff, start, end, replicon, graph_siz
   
   
   D2 <- D[,which(colnames(D)=="Row"):ncol(D)]
-  Op <- D2 %>% pivot_longer(cols = which(str_remove(colnames(D2), "m"%R%END) %in% N), names_to = "run", 
-                           values_to = "expression")
-  Op$run <- str_remove(Op$run, "m"%R%END)
+  D2$expression <- NA
+  D2$run <- NA
+  
+  for(i in N){
+    D1 <- D2
+    
+    D1$expression <- D2[, which(str_sub(colnames(D2),1,-2)==i )]
+    D1$run <- i
+    if(i ==N[1]){
+      Op <- D1
+    }else{
+      Op <- rbind(Op, D1)
+    }
+  }
+  
+  
   
   si <- 13
   
