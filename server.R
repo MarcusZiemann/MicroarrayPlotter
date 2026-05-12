@@ -17,7 +17,6 @@ library(shinyWidgets)
 library(svglite)
 library(sortable)
 library(cowplot)
-#library(grDevices)
 library(httpuv)
 
 
@@ -25,6 +24,7 @@ library(httpuv)
 source("Plotter.R")
 
 #setwd("Y:/exchange/Marcus/M_pro/Microarray_plotter/")
+l <- 
 l <-list.dirs("databases", full.names = FALSE, recursive = FALSE)
 
 

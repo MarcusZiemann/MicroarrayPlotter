@@ -7,7 +7,7 @@ library(ggpubr)
 #load("U:/Marcus/New/all data seperate_joined/out.Rdata")
 #setwd("U:/Marcus/New/all data seperate_joined")
 
-col1 <- c("#228b22",#forestgreen
+col1 <- c("#39D139",#forestgreen
           "#186118", #dark green
           "#4f94cd", #steelblue3
           "#95bfe1", #light blue
@@ -22,8 +22,7 @@ col1 <- c("#228b22",#forestgreen
           "#fe8601", #orange
           "#be4e0f", #brown
           "#000000", #black
-          "#ffffff"
-) 
+          "#ffffff") 
 
 
 

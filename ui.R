@@ -17,12 +17,14 @@ library(colourpicker)
 library(GEOquery)
 
 #source("Plotter.R")
+l <- ""
+l <-list.dirs("databases", full.names = FALSE, recursive = FALSE)
 
 ###shiny
 options(shiny.maxRequestSize=200*1024^2)
 
 ui <-fluidPage(
-  titlePanel("Microarray-Plotter"),
+  titlePanel("Microarrayplotter"),
   theme = shinythemes::shinytheme("spacelab"),
   sidebarLayout(
     sidebarPanel(
