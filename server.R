@@ -24,7 +24,7 @@ library(httpuv)
 source("Plotter.R")
 
 #setwd("Y:/exchange/Marcus/M_pro/Microarray_plotter/")
-l <- 
+l <- ""
 l <-list.dirs("databases", full.names = FALSE, recursive = FALSE)
 
 
